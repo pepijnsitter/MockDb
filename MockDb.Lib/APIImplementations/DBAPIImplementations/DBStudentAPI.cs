@@ -17,12 +17,12 @@ namespace MockDb.Lib.APIImplementations.DBAPIImplementations
 
         public async Task<Student> GetById(int id)
         {
-            return await Db.Students.Where(student => student.Id == id).SingleOrDefaultAsync();
+            return await Db.Students.Where(student => student.StudentId == id).SingleOrDefaultAsync();
         }
 
         public async Task<ICollection<Student>> FindEnrolledInCourse(string course)
         {
-            return await Db.Students.Where(student => student.Courses.Any(c => c.Name == course))
+            return await Db.Students.Where(student => student.StudentCourses.Any(c => c.Course.Name == course))
                 .ToListAsync();
         }
 

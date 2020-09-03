@@ -25,9 +25,9 @@ namespace MockDb.Tests
             {
                 db.Courses.AddRange(new[]
                 {
-                    new Course { Id = 1, Name = "Advanced Basketweaving" },
-                    new Course { Id = 2, Name = "Math for Liberal Arts Majors" },
-                    new Course { Id = 3, Name = "The Cosmos: An Introduction" }
+                    new Course { CourseId = 1, Name = "Advanced Basketweaving" },
+                    new Course { CourseId = 2, Name = "Math for Liberal Arts Majors" },
+                    new Course { CourseId = 3, Name = "The Cosmos: An Introduction" }
                 });
 
                 db.SaveChanges();
@@ -37,13 +37,19 @@ namespace MockDb.Tests
             {
                 foreach (var iteration in Enumerable.Range(1, 100))
                 {
-                    db.Students.Add(new Student
+                    var newStudent = new Student
                     {
-                        Id = iteration,
+                        StudentId = iteration,
                         FirstName = "Test",
                         LastName = $"Student {iteration}",
-                        Courses = db.Courses.Where(course => iteration % course.Id == 0).ToList()
-                    });
+                    };
+                    var coursesToAdd = db.Courses.Where(course => iteration % course.CourseId == 0).ToList();
+                    foreach (var courseToAdd in coursesToAdd)
+                    {
+                        newStudent.StudentCourses.Add(new StudentCourse { Student = newStudent, Course = courseToAdd });
+                    }
+
+                    db.Students.Add(newStudent);
                 }
 
                 db.SaveChanges();

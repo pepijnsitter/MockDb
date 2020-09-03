@@ -30,6 +30,8 @@ namespace MockDb.Tests.APIImplementations.DBAPIImplementations
             var students = await api.FindEnrolledInCourse("Advanced Basketweaving");
 
             Assert.NotNull(students);
+
+            // Should this not be?  Assert.Equal(100, students.Count); since Advanced Basketweaving is the first course and it will therefor be added for all students?
             Assert.Equal(students.Count, 34);
         }
 

@@ -7,7 +7,7 @@ namespace MockDb.Lib
     {
         public Guid InternalId { get; set; }
 
-        public int Id { get; set; }
+        public int StudentId { get; set; }
 
         public String LastName { get; set; }
 
@@ -15,6 +15,6 @@ namespace MockDb.Lib
 
         public String Email { get; set; }
 
-        public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<StudentCourse> StudentCourses { get; set; } = new List<StudentCourse>();
     }
 }

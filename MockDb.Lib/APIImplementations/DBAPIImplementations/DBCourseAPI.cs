@@ -17,7 +17,7 @@ namespace MockDb.Lib.APIImplementations.DBAPIImplementations
 
         public async Task<Course> GetById(int id)
         {
-            return await Db.Courses.Where(course => course.Id == id).SingleOrDefaultAsync();
+            return await Db.Courses.Where(course => course.CourseId == id).SingleOrDefaultAsync();
         }
 
         public async Task<ICollection<Course>> GetCourses(int pageNumber, int pageSize)
@@ -26,7 +26,7 @@ namespace MockDb.Lib.APIImplementations.DBAPIImplementations
                 .Skip(pageSize * (pageNumber - 1))
                 .Take(pageSize).ToListAsync();
         }
-         
+
         public async Task<Course> GetByName(string name)
         {
             return await Db.Courses.Where(course => course.Name == name).SingleOrDefaultAsync();
